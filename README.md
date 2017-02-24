@@ -1,2 +1,2 @@
 # Carousel
-图片轮播
+使用ViewPager&Glide实现网络图片轮播
