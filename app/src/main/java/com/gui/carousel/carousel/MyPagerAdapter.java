@@ -20,7 +20,7 @@ public class MyPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 20000;
+        return 200000;
     }
 
     @Override

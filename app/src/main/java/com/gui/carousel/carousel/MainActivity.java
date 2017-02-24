@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager vp;
     private Handler mHandler;
     private final int WHAT_START_PLAY = 1;
+    private int initPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initHandler();
         ArrayList<String> imgUrls = new ArrayList<String>();
-        imgUrls.add("http://7xq533.com1.z0.glb.clouddn.com/world_is_big.png");
-        imgUrls.add("http://7xq533.com1.z0.glb.clouddn.com/cable-tip.png");
-        imgUrls.add("http://7xq533.com1.z0.glb.clouddn.com/cable-tip.png");
+        imgUrls.add("http://a.hiphotos.baidu.com/image/pic/item/e7cd7b899e510fb3a78c787fdd33c895d0430c44.jpg");
+        imgUrls.add("http://a.hiphotos.baidu.com/image/pic/item/caef76094b36acaf166c991478d98d1000e99c4d.jpg");
+        imgUrls.add("http://c.hiphotos.baidu.com/image/pic/item/f703738da977391279688a89fc198618377ae288.jpg");
         initViewPager(imgUrls);
-        Message msg = mHandler.obtainMessage(WHAT_START_PLAY, 10000 + 1, 0);
+        Message msg = mHandler.obtainMessage(WHAT_START_PLAY, initPosition + 1, 0);
         mHandler.sendMessageDelayed(msg, 2000);
     }
 
@@ -62,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<View> imageViews = new ArrayList<>();
         for (Object url : imageUrls) {
             String urlStr = (String) url;
-            ImageView imageView = new ImageView(mContext);
-//            Glide.with(this).load(urlStr).asBitmap().into(imageView);
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            ImageView imageView = new ImageView(this);
+            Glide.with(this).load(urlStr).asBitmap().into(imageView);
+//            imageView.setImageResource(R.mipmap.ic_launcher);
             imageViews.add(imageView);
         }
         MyPagerAdapter adapter = new MyPagerAdapter(imageViews);
         vp.setAdapter(adapter);
-        vp.setCurrentItem(10000);
+        vp.setCurrentItem(initPosition);
 
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             // 自动播放时的下一页
